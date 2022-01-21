@@ -45,7 +45,7 @@ stages:
         displayName: Build Docker image
         inputs:
           containerRegistry: Docker Hub
-          repository: requarks/wiki
+          repository: joppehoekstra/greencampaignhandbook
           Dockerfile: dev/build/Dockerfile
           buildContext: '$(System.DefaultWorkingDirectory)'
           tags: |
@@ -57,7 +57,7 @@ stages:
         displayName: Extract compiled files
         inputs:
           script: |
-            docker create --name wiki requarks/wiki:canary
+            docker create --name wiki joppehoekstra/greencampaignhandbook:canary
             docker cp wiki:/wiki $(Build.StagingDirectory)
             docker rm wiki
             rm $(Build.StagingDirectory)/wiki/config.yml
