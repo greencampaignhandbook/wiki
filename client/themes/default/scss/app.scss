@@ -1,10 +1,24 @@
 /* THEME SPECIFIC STYLES */
 
-.v-toolbar__title, hgroup h1, hgroup h2, .v-navigation-drawer {
-  font-family: 'Colby Narrow';
-  font-weight: 700;
+.v-toolbar__title, hgroup h1, hgroup h2, .v-navigation-drawer, .second-sidebar .v-list-item__title, .second-sidebar .overline{
+  font-family: 'Colby Narrow' !important;
+  font-weight: 700 !important;
   text-transform: uppercase;
 }
+
+.second-sidebar {
+  .v-list-item__title {
+    font-size: 1.2em !important
+  }
+  .list-subitem .v-list-item__title {
+    font-size: 1em !important
+  }
+}
+
+.v-sheet.v-card{
+  border-radius: 8px;
+}
+
 
 .v-navigation-drawer .v-list-item__title{
   font-size: 1.2em !important;
@@ -30,6 +44,12 @@ hgroup {
 }
 
 .v-main .contents {
+
+  .image img{
+    border-radius: 8px;
+    overflow:hidden;
+  }
+
   color: mc('grey', '800');
   padding: .5rem 0 50px;
   position: relative;
@@ -47,13 +67,20 @@ hgroup {
   // ---------------------------------
 
   a {
-    color: mc('blue', '700');
+    color: mc('theme', 'primary');
+    text-decoration: none;
+    border-bottom: 2px solid mc('theme', 'primary');
+
+    &:hover{
+      border-bottom-style: solid;
+      border-bottom-width: 4px;
+    }
 
     &.is-internal-link.is-invalid-page {
-      color: mc('red', '700');
+      color: mc('theme', 'accent');
 
       @at-root .theme--dark & {
-        color: mc('red', '200');
+        color: mc('theme', 'accent');
       }
     }
 
@@ -206,6 +233,7 @@ hgroup {
 
     a {
       color: white;
+      border-color:white;
 
       &:after{
         color: white !important

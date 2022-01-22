@@ -1,20 +1,22 @@
 <template lang="pug">
   div
     //-> Custom Navigation
-    v-list.py-2(v-if='currentMode === `custom`', dense, :dark='dark')
+    v-list.py-2(v-if='currentMode === `custom`', dense, light class="ma-4")
       template(v-for='item of items')
         v-list-item(
+          class="white"
           v-if='item.k === `link`'
           :href='item.t'
           :target='item.y === `externalblank` ? `_blank` : `_self`'
           :rel='item.y === `externalblank` ? `noopener` : ``'
+          exact-active-class="accent"
           )
           v-list-item-avatar(size='24', tile)
             v-icon(v-if='item.c.match(/fa[a-z] fa-/)', size='19') {{ item.c }}
             v-icon(v-else) {{ item.c }}
           v-list-item-title {{ item.l }}
         v-divider.my-2(v-else-if='item.k === `divider`')
-        v-subheader.pl-4(v-else-if='item.k === `header`') {{ item.l }}
+        v-subheader.pl-4(v-else-if='item.k === `header`' class="white") {{ item.l }}
     //-> Browse
     v-list.py-2(v-else-if='currentMode === `browse`', dense, :class='color', :dark='dark')
       template(v-if='currentParent.id > 0')
@@ -213,3 +215,24 @@ export default {
   }
 }
 </script>
+<style scoped>
+.v-divider{
+  background: white;
+  margin: 0 !important;
+  max-height: none !important;
+  height: 8px !important;
+  border-radius: 0 0 8px 8px;
+}
+.v-subheader{
+  border-radius:8px 8px 0 0;
+  margin-top:16px
+}
+.v-divider:first-child, .v-divider + .v-divider{
+  border-radius: 8px 8px 0 0;
+  padding-top:16px;
+  padding-top: 0;
+}
+.active{
+  background: red
+}
+</style>

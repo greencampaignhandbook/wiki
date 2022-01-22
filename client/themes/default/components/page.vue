@@ -41,8 +41,8 @@
             divider='/'
             )
             template(slot='item', slot-scope='props')
-              v-icon(v-if='props.item.path === "/"', small, @click='goHome') mdi-home
-              v-btn.ma-0(v-else, :href='props.item.path', small, text) {{props.item.name}}
+              v-icon(v-if='props.item.path === "/"', small, @click='goHome') mdi-home-outline
+              v-btn.ma-0(v-else, :href='props.item.path', small, text color="primary") {{props.item.name}}
           template(v-if='!isPublished')
             v-spacer
             .caption.red--text {{$t('common:page.unpublished')}}
@@ -168,44 +168,45 @@
                 slot(name='comments')
 
           // SECONDARY SIDEBAR
-          v-flex(v-if='$vuetify.breakpoint.lgAndUp', class="page-col-sd px-10")
+          v-flex(v-if='$vuetify.breakpoint.lgAndUp', class="page-col-sd px-8 second-sidebar")
             v-card.mb-5(v-if='tocDecoded.length' outlined)
-              .overline.pa-5.pb-0(:class='$vuetify.theme.dark ? `primary--text text--lighten-2` : `primary--text`') {{$t('common:page.toc')}}
+              .overline.pa-5.pb-0 {{$t('common:page.toc')}}
               v-list.pb-3(dense, nav, :class='$vuetify.theme.dark ? `darken-3-d3` : ``')
                 template(v-for='(tocItem, tocIdx) in tocDecoded')
                   v-list-item(@click='$vuetify.goTo(tocItem.anchor, scrollOpts)')
-                    v-icon(color='grey', small) {{ $vuetify.rtl ? `mdi-chevron-left` : `mdi-chevron-right` }}
                     v-list-item-title.px-3 {{tocItem.title}}
                   //- v-divider(v-if='tocIdx < toc.length - 1 || tocItem.children.length')
                   template(v-for='tocSubItem in tocItem.children')
-                    v-list-item(@click='$vuetify.goTo(tocSubItem.anchor, scrollOpts)')
+                    v-list-item(@click='$vuetify.goTo(tocSubItem.anchor, scrollOpts)' class="list-subitem" dense)
                       v-icon.px-3(color='grey lighten-1', small) {{ $vuetify.rtl ? `mdi-chevron-left` : `mdi-chevron-right` }}
                       v-list-item-title.px-3.caption.grey--text(:class='$vuetify.theme.dark ? `text--lighten-1` : `text--darken-1`') {{tocSubItem.title}}
                     //- v-divider(inset, v-if='tocIdx < toc.length - 1')
 
             v-card.mb-5(v-if='tags.length > 0' outlined)
               .pa-5
-                .overline.teal--text.pb-2(:class='$vuetify.theme.dark ? `text--lighten-3` : ``') {{$t('common:page.tags')}}
+                .overline.pb-2() {{$t('common:page.tags')}}
                 v-chip.mr-1.mb-1(
                   label
-                  :color='$vuetify.theme.dark ? `teal darken-1` : `teal lighten-5`'
+                  text-color="black"
+                  color="accent"
                   v-for='(tag, idx) in tags'
                   :href='`/t/` + tag.tag'
                   :key='`tag-` + tag.tag'
                   )
-                  v-icon(:color='$vuetify.theme.dark ? `teal lighten-3` : `teal`', left, small) mdi-tag
-                  span(:class='$vuetify.theme.dark ? `teal--text text--lighten-5` : `teal--text text--darken-2`') {{tag.title}}
+                  v-icon(color="black" left, small) mdi-tag-outline
+                  span(class="text--black") {{tag.title}}
                 v-chip.mr-1.mb-1(
                   label
-                  :color='$vuetify.theme.dark ? `teal darken-1` : `teal lighten-5`'
+                  text-color="black"
+                  color="accent"
                   :href='`/t/` + tags.map(t => t.tag).join(`/`)'
                   :aria-label='$t(`common:page.tagsMatching`)'
                   )
-                  v-icon(:color='$vuetify.theme.dark ? `teal lighten-3` : `teal`', size='20') mdi-tag-multiple
+                  v-icon(size='20') mdi-tag-multiple-outline
 
             v-card.mb-5(v-if='commentsEnabled && commentsPerms.read' outlined)
               .pa-5
-                .overline.pb-2.blue-grey--text.d-flex.align-center(:class='$vuetify.theme.dark ? `text--lighten-3` : `text--darken-2`')
+                .overline.pb-2.d-flex.align-center(:class='$vuetify.theme.dark ? `text--lighten-3` : `text--darken-2`')
                   span {{$t('common:comments.sdTitle')}}
                   //- v-spacer
                   //- v-chip.text-center(
@@ -241,7 +242,7 @@
 
             v-card.mb-5(outlined)
               .pa-5
-                .overline.primary--text.d-flex(:class='$vuetify.theme.dark ? `text--lighten-3` : ``')
+                .overline.d-flex(:class='$vuetify.theme.dark ? `text--lighten-3` : ``')
                   span {{$t('common:page.lastEditedBy')}}
                   v-spacer
                   v-tooltip(right, v-if='isAuthenticated')
@@ -254,7 +255,7 @@
                         v-if='hasReadHistoryPermission'
                         :aria-label='$t(`common:header.history`)'
                         )
-                        v-icon(color='indigo', dense) mdi-history
+                        v-icon(color='primary', dense) mdi-history
                     span {{$t('common:header.history')}}
                 .body-2.grey--text(:class='$vuetify.theme.dark ? `` : `text--darken-3`') {{ authorName }}
                 .caption.grey--text.text--darken-1 {{ updatedAt | moment('calendar') }}
@@ -293,7 +294,7 @@
             //-         v-icon(:color='printView ? `primary` : `grey`') mdi-printer
             //-     span {{$t('common:page.printFormat')}}
 
-    nav-footer
+    //- nav-footer
     notify
     search-results
     v-fab-transition
@@ -465,9 +466,9 @@ export default {
         },
         bar: {
           onlyShowBarOnScroll: false,
-          background: '#42A5F5',
+          background: this.$vuetify.theme.themes.light.primary,
           hoverStyle: {
-            background: '#64B5F6'
+            background: this.$vuetify.theme.themes.light.primary
           }
         }
       },

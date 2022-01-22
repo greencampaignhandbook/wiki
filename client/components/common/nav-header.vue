@@ -18,8 +18,9 @@
         @keyup.enter='searchEnter'
         autocomplete='none'
       )
-    v-layout(row)
-      v-flex(xs5, md4)
+    v-layout(row class="justify-between")
+      // Logo & title
+      v-flex()
         v-toolbar.nav-header-inner(color='primary', dark, flat, :class='$vuetify.rtl ? `pr-3` : `pl-3`')
           v-avatar(tile, size='34', @click='goHome')
             v-img.org-logo(:src='logoUrl')
@@ -44,9 +45,10 @@
           //-       v-list-item-content
           //-         v-list-item-title.body-2.grey--text.text--ligten-2 {{$t('common:header.imagesFiles')}}
           //-         v-list-item-subtitle.overline.grey--text.text--lighten-2 Coming soon
-          v-toolbar-title(:class='{ "mx-3": $vuetify.breakpoint.mdAndUp, "mx-1": $vuetify.breakpoint.smAndDown }')
+          v-toolbar-title(:class='{ "mx-3": $vuetify.breakpoint.mdAndUp, "mx-1": $vuetify.breakpoint.smAndDown }' v-if='$vuetify.breakpoint.smAndUp')
             span.subheading {{title}}
-      v-flex(md4, v-if='$vuetify.breakpoint.mdAndUp')
+      // Search & tags (big screen)
+      v-flex( v-if='$vuetify.breakpoint.mdAndUp')
         v-toolbar.nav-header-inner(color='primary', dark, flat)
           slot(name='mid')
             transition(name='navHeaderSearch', v-if='searchIsShown')
@@ -75,9 +77,10 @@
             v-tooltip(bottom)
               template(v-slot:activator='{ on }')
                 v-btn.ml-2.mr-0(icon, v-on='on', href='/t', :aria-label='$t(`common:header.browseTags`)')
-                  v-icon(color='white') mdi-tag-multiple
+                  v-icon(color='white') mdi-tag-multiple-outline
               span {{$t('common:header.browseTags')}}
-      v-flex(xs7, md4)
+      // Right side buttons
+      v-flex()
         v-toolbar.nav-header-inner.pr-4(color='primary', dark, flat)
           v-spacer
           .navHeaderLoading.mr-3
@@ -238,6 +241,7 @@
                 v-icon(color='white') mdi-account-circle
             span {{$t('common:header.login')}}
 
+    // Other components
     page-selector(mode='create', v-model='newPageModal', :open-handler='pageNewCreate', :locale='locale')
     page-selector(mode='move', v-model='movePageModal', :open-handler='pageMoveRename', :path='path', :locale='locale')
     page-selector(mode='create', v-model='duplicateOpts.modal', :open-handler='pageDuplicateHandle', :path='duplicateOpts.path', :locale='duplicateOpts.locale')
