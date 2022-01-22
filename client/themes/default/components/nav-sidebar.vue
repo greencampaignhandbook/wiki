@@ -1,35 +1,7 @@
 <template lang="pug">
   div
-    .pa-3.d-flex(v-if='navMode === `MIXED`', :class='$vuetify.theme.dark ? `grey darken-5` : `blue darken-3`')
-      v-btn(
-        depressed
-        :color='$vuetify.theme.dark ? `grey darken-4` : `blue darken-2`'
-        style='min-width:0;'
-        @click='goHome'
-        :aria-label='$t(`common:header.home`)'
-        )
-        v-icon(size='20') mdi-home
-      v-btn.ml-3(
-        v-if='currentMode === `custom`'
-        depressed
-        :color='$vuetify.theme.dark ? `grey darken-4` : `blue darken-2`'
-        style='flex: 1 1 100%;'
-        @click='switchMode(`browse`)'
-        )
-        v-icon(left) mdi-file-tree
-        .body-2.text-none {{$t('common:sidebar.browse')}}
-      v-btn.ml-3(
-        v-else-if='currentMode === `browse`'
-        depressed
-        :color='$vuetify.theme.dark ? `grey darken-4` : `blue darken-2`'
-        style='flex: 1 1 100%;'
-        @click='switchMode(`custom`)'
-        )
-        v-icon(left) mdi-navigation
-        .body-2.text-none {{$t('common:sidebar.mainMenu')}}
-    v-divider
     //-> Custom Navigation
-    v-list.py-2(v-if='currentMode === `custom`', dense, :class='color', :dark='dark')
+    v-list.py-2(v-if='currentMode === `custom`', dense, :dark='dark')
       template(v-for='item of items')
         v-list-item(
           v-if='item.k === `link`'
@@ -65,6 +37,8 @@
           v-list-item-avatar(size='24')
             v-icon mdi-text-box
           v-list-item-title {{ item.title }}
+
+    v-alert(v-if='isDevMode' type="warning" color="white" outlined dense class="ma-md-4") Development version
 </template>
 
 <script>
@@ -95,6 +69,7 @@ export default {
   },
   data() {
     return {
+      isDevMode: false,
       currentMode: 'custom',
       currentItems: [],
       currentParent: {
@@ -222,6 +197,8 @@ export default {
     }
   },
   mounted () {
+    this.isDevMode = siteConfig.devMode === true
+
     this.currentParent.title = `/ ${this.$t('common:sidebar.root')}`
     if (this.navMode === 'TREE') {
       this.currentMode = 'browse'

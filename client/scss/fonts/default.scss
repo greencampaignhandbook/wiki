@@ -1,4 +1,30 @@
 @font-face {
+  font-family: 'Colby Narrow';
+  src: url('../../fonts/default/Colby-Narrow-Bold.woff2') format('woff2'),
+      url('../../fonts/default/Colby-Narrow-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Colby Narrow';
+  src: url('../../fonts/default/Colby-Narrow-Medium.woff2') format('woff2'),
+      url('../../fonts/default/Colby-Narrow-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Colby Narrow';
+  src: url('../../fonts/default/Colby-Narrow-Bold-Italic.woff2') format('woff2'),
+      url('../../fonts/default/Colby-Narrow-Bold-Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+// ROBOTO
+
+@font-face {
   font-family: 'Roboto';
   src: url('../../fonts/default/Roboto-MediumItalic.woff2') format('woff2'),
       url('../../fonts/default/Roboto-MediumItalic.woff') format('woff');
