@@ -9,7 +9,6 @@
           :href='item.t'
           :target='item.y === `externalblank` ? `_blank` : `_self`'
           :rel='item.y === `externalblank` ? `noopener` : ``'
-          exact-active-class="accent"
           )
           v-list-item-avatar(size='24', tile)
             v-icon(v-if='item.c.match(/fa[a-z] fa-/)', size='19') {{ item.c }}

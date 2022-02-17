@@ -52,7 +52,7 @@
       hgroup
         v-col.px-6.pb-0.pt-8
           div: h1 {{title}}
-          div: h2 {{description}}
+          div(v-if="description"): h2 {{description}}
 
       v-container.pl-5(fluid, grid-list-xl)
         v-layout(row)
