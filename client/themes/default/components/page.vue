@@ -167,6 +167,8 @@
               .comments-main
                 slot(name='comments')
 
+            nav-footer
+
           // SECONDARY SIDEBAR
           v-flex(v-if='$vuetify.breakpoint.lgAndUp', class="page-col-sd px-8 second-sidebar")
             v-card.mb-5(v-if='tocDecoded.length' outlined)

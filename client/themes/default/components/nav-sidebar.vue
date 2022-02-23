@@ -14,7 +14,7 @@
             v-icon(v-if='item.c.match(/fa[a-z] fa-/)', size='19') {{ item.c }}
             v-icon(v-else) {{ item.c }}
           v-list-item-title {{ item.l }}
-        v-divider.my-2(v-else-if='item.k === `divider`')
+        v-divider(v-else-if='item.k === `divider`')
         v-subheader.pl-4(v-else-if='item.k === `header`' class="white") {{ item.l }}
     //-> Browse
     v-list.py-2(v-else-if='currentMode === `browse`', dense, :class='color', :dark='dark')
