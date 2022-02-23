@@ -1,5 +1,6 @@
 <template lang="pug">
-  v-footer.justify-center(color='white', inset)
+  footer.justify-center(color='white')
+    h2 Green Campaign Handbook
     .caption.grey--text(:class='$vuetify.theme.dark ? `text--lighten-1` : `text--darken-1`')
       template(v-if='company && company.length > 0 && contentLicense !== ``')
         span(v-if='contentLicense === `alr`') {{ $t('common:footer.copyright', { company: company, year: currentYear, interpolation: { escapeValue: false } }) }} |&nbsp;
@@ -43,21 +44,8 @@ export default {
 </script>
 
 <style lang="scss">
-  .v-footer {
-    a {
-      text-decoration: none;
-    }
-
-    &.altbg {
-      background: mc('theme', 'primary');
-
-      span {
-        color: mc('blue', '300');
-      }
-
-      a {
-        color: mc('blue', '200');
-      }
-    }
-  }
+footer a{
+  color: #757575 !important;
+  text-decoration: none;
+}
 </style>
