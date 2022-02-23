@@ -42,7 +42,17 @@ When you're done and no longer need the development environment, open the **Remo
 6. Stop wiki container: ```docker stop wiki```
 7. Remove docker container ```docker container rm <ID>```
 8. Remove wiki image ```docker rmi <ID>```
-9. Build new container from latest image: ```docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest```
+9. Build new container from latest image.
+With SSL:
+```bash
+d
+```
+
+Without SSL:
+```bash
+docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest
+```
+
 10. Start wiki container ```docker start wiki```
 
 # Updating server

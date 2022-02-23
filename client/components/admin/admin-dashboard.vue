@@ -19,7 +19,7 @@
               easing='easeOutQuint'
               )
       v-flex(xs12 md6 lg4 xl3 d-flex)
-        v-card.blue.darken-3.dashboard-card.animated.fadeInUp.wait-p2s(dark)
+        v-card.secondary.dashboard-card.animated.fadeInUp.wait-p2s(dark)
           v-card-text
             v-icon.dashboard-icon mdi-account
             .overline {{$t('admin:dashboard.users')}}
@@ -30,7 +30,7 @@
               easing='easeOutQuint'
               )
       v-flex(xs12 md6 lg4 xl3 d-flex)
-        v-card.blue.darken-4.dashboard-card.animated.fadeInUp.wait-p4s(dark)
+        v-card.secondary.dashboard-card.animated.fadeInUp.wait-p4s(dark)
           v-card-text
             v-icon.dashboard-icon mdi-account-group
             .overline {{$t('admin:dashboard.groups')}}
@@ -41,17 +41,21 @@
               easing='easeOutQuint'
               )
       v-flex(xs12 md6 lg12 xl3 d-flex)
-        v-card.dashboard-card.animated.fadeInUp.wait-p6s(
-          :class='isLatestVersion ? "green" : "red lighten-2"'
-          dark
-          )
-          v-btn.btn-animate-wrench(fab, absolute, :right='!$vuetify.rtl', :left='$vuetify.rtl', top, small, light, to='system', v-if='hasPermission(`manage:system`)')
-            v-icon(:color='isLatestVersion ? `green` : `red darken-4`', small) mdi-wrench
+        v-card.dashboard-card.animated.fadeInUp.wait-p6s.accent
           v-card-text
-            v-icon.dashboard-icon mdi-blur
-            .subtitle-1 Wiki.js {{info.currentVersion}}
-            .body-2(v-if='isLatestVersion') {{$t('admin:dashboard.versionLatest')}}
-            .body-2(v-else) {{$t('admin:dashboard.versionNew', { version: info.latestVersion })}}
+            .subtitle-1 Customised version of Wiki.js {{info.currentVersion}}
+            .body-2 Developed by Joppe Hoekstra
+        //- v-card.dashboard-card.animated.fadeInUp.wait-p6s(
+        //-   :class='isLatestVersion ? "green" : "red lighten-2"'
+        //-   dark
+        //-   )
+        //-   v-btn.btn-animate-wrench(fab, absolute, :right='!$vuetify.rtl', :left='$vuetify.rtl', top, small, light, to='system', v-if='hasPermission(`manage:system`)')
+        //-     v-icon(:color='isLatestVersion ? `green` : `red darken-4`', small) mdi-wrench
+        //-   v-card-text
+        //-     v-icon.dashboard-icon mdi-blur
+        //-     .subtitle-1 Wiki.js {{info.currentVersion}}
+        //-     .body-2(v-if='isLatestVersion') {{$t('admin:dashboard.versionLatest')}}
+        //-     .body-2(v-else) {{$t('admin:dashboard.versionNew', { version: info.latestVersion })}}
       v-flex(xs12, xl6)
         v-card.radius-7.animated.fadeInUp.wait-p2s
           v-toolbar(:color='$vuetify.theme.dark ? `grey darken-2` : `grey lighten-5`', dense, flat)
