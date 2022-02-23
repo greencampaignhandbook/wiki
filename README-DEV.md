@@ -35,12 +35,15 @@ When you're done and no longer need the development environment, open the **Remo
 
 # Updating Wiki.js on server
 1. Push to GitHub repository (will automatically run GitHub action to build and push docker image)
-2. Access server terminal on local device: ```ssh user@ip```
-3. Pull new image from docker: ```docker pull joppehoekstra/greencampaignhandbook```
-3. Stop wiki container
-4. List docker images
-5. Remove wiki image
-6. Build new container from latest image: ```docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest```
+2. Access server terminal on local device: ```ssh -i ~/.ssh/igreencampaignhandbook root@ip```
+3. Pull new image from docker: ```docker pull joppehoekstra/greencampaignhandbook:latest```
+4. List docker containers ```docker container ls -a```
+5. List docker images ```docker images```
+6. Stop wiki container: ```docker stop wiki```
+7. Remove docker container ```docker container rm <ID>```
+8. Remove wiki image ```docker rmi <ID>```
+9. Build new container from latest image: ```docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest```
+10. Start wiki container ```docker start wiki```
 
 # Updating server
 ```bash
@@ -137,7 +140,7 @@ docker rm wiki
 5. Run the following command by replacing the `wiki.example.com` and `admin@example.com` values with **your own domain / sub-domain** and the **email address** of your wiki administrator:
 
 ```bash
-docker create --name=wiki -e LETSENCRYPT_DOMAIN=wiki.example.com -e LETSENCRYPT_EMAIL=admin@example.com -e SSL_ACTIVE=1 -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=1 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 requarks/wiki:2
+docker create --name=wiki -e LETSENCRYPT_DOMAIN=campaigners.europeangreens.eu -e LETSENCRYPT_EMAIL=hey@joppehoekstra.nl -e SSL_ACTIVE=1 -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest
 ```
 
 6. Start the container by running the command:
