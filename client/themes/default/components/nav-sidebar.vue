@@ -11,8 +11,8 @@
           :rel='item.y === `externalblank` ? `noopener` : ``'
           )
           v-list-item-avatar(size='24', tile)
-            v-icon(v-if='item.c.match(/fa[a-z] fa-/)', size='19') {{ item.c }}
-            v-icon(v-else) {{ item.c }}
+            v-icon(v-if='item.c.match(/fa[a-z] fa-/)', size='19' color="primary") {{ item.c }}
+            v-icon(v-else color="primary") {{ item.c }}
           v-list-item-title {{ item.l }}
         v-divider(v-else-if='item.k === `divider`')
         v-subheader.pl-4(v-else-if='item.k === `header`' class="white") {{ item.l }}

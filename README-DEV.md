@@ -25,6 +25,8 @@
 9. Browse to **http://localhost:3000/** _(replace localhost with the hostname of your machine if applicable)_.
 10. Complete the setup wizard to finish the installation.
 
+Important: Make sure to merge any new updates from the original Wiki.js repository on a regular basis. 
+
 ## Stopping the project
 
 Click on **File > Close Remote Connection** to stop the containers and close the Visual Studio Code instance.
@@ -33,19 +35,19 @@ Click on **File > Close Remote Connection** to stop the containers and close the
 
 When you're done and no longer need the development environment, open the **Remote Explorer** tab and remove all containers starting with the name `wiki`.
 
-# Updating Wiki.js on server
+# Updating customised Wiki.js on server
 1. Push to GitHub repository (will automatically run GitHub action to build and push docker image)
 2. Access server terminal on local device: ```ssh -i ~/.ssh/igreencampaignhandbook root@ip```
 3. Pull new image from docker: ```docker pull joppehoekstra/greencampaignhandbook:latest```
 4. List docker containers ```docker container ls -a```
 5. List docker images ```docker images```
 6. Stop wiki container: ```docker stop wiki```
-7. Remove docker container ```docker container rm <ID>```
-8. Remove wiki image ```docker rmi <ID>```
+7. Remove docker container ````docker rm wiki``` or ```docker container rm <ID>```
+8. Remove the old wiki image ```docker rmi <ID>```
 9. Build new container from latest image.
 With SSL:
 ```bash
-d
+docker create --name=wiki -e LETSENCRYPT_DOMAIN=campaigners.europeangreens.eu -e LETSENCRYPT_EMAIL=hey@joppehoekstra.nl -e SSL_ACTIVE=1 -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e UPGRADE_COMPANION=0 --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 -p 443:3443 joppehoekstra/greencampaignhandbook:latest
 ```
 
 Without SSL:

@@ -71,6 +71,10 @@ hgroup {
     text-decoration: none;
     border-bottom: 2px solid mc('theme', 'primary');
 
+    &.toc-anchor {
+      border: none
+    }
+
     &:hover{
       border-bottom-style: solid;
       border-bottom-width: 4px;
