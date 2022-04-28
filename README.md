@@ -181,6 +181,7 @@ Support this project by becoming a sponsor. Your name will show up in the Contri
 - VMO Solutions ([@vmosolutions](https://github.com/vmosolutions))
 - aniketpanjwani ([@aniketpanjwani](https://github.com/aniketpanjwani))
 - aytaa ([@aytaa](https://github.com/aytaa))
+- chaee ([@chaee](https://github.com/chaee))
 - magicpotato ([@fortheday](https://github.com/fortheday))
 - motoacs ([@motoacs](https://github.com/motoacs))
 - rburckner ([@rburckner](https://github.com/rburckner))
@@ -316,6 +317,23 @@ Support this project by becoming a sponsor. Your logo will show up in the Contri
         <a href="https://opencollective.com/wikijs/sponsor/34/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/34/avatar.svg"></a>
       </td>
     </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://opencollective.com/wikijs/sponsor/35/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/35/avatar.svg"></a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://opencollective.com/wikijs/sponsor/36/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/36/avatar.svg"></a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://opencollective.com/wikijs/sponsor/37/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/37/avatar.svg"></a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://opencollective.com/wikijs/sponsor/38/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/38/avatar.svg"></a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://opencollective.com/wikijs/sponsor/39/website" target="_blank"><img src="https://opencollective.com/wikijs/sponsor/39/avatar.svg"></a>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -335,6 +353,7 @@ Thank you to all our patrons! 🙏 [[Become a patron](https://www.patreon.com/re
 - Brandon Curtis
 - Dave 'Sri' Seah
 - djagoo
+- dz
 - Douglas Lassance
 - Ernie Reid
 - Etienne
@@ -360,6 +379,7 @@ Thank you to all our patrons! 🙏 [[Become a patron](https://www.patreon.com/re
 - Philipp Schürch
 - Tracey Duffy
 - Richeir
+- Shad Narcher
 - SmartNET.works
 - Stepan Sokolovskyi
 - Zach Maynard
