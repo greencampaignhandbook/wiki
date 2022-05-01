@@ -47,7 +47,7 @@ When you're done and no longer need the development environment, open the **Remo
 4. List docker containers ```docker container ls -a```
 5. List docker images ```docker images```
 6. Stop wiki container: ```docker stop wiki```
-7. Remove docker container ````docker rm wiki``` or ```docker container rm <ID>```
+7. Remove docker container ```docker rm wiki``` or ```docker container rm <ID>```
 8. Remove the old wiki image ```docker rmi <ID>```
 9. Build new container from latest image.
 With SSL:
