@@ -22,31 +22,34 @@
       // Logo & title
       v-flex()
         v-toolbar.nav-header-inner(color='primary', dark, flat, :class='$vuetify.rtl ? `pr-3` : `pl-3`')
-          v-avatar(tile, size='34', @click='goHome')
-            v-img.org-logo(:src='logoUrl')
-          //- v-menu(open-on-hover, offset-y, bottom, left, min-width='250', transition='slide-y-transition')
-          //-   template(v-slot:activator='{ on }')
-          //-     v-app-bar-nav-icon.btn-animate-app(v-on='on', :class='$vuetify.rtl ? `mx-0` : ``')
-          //-       v-icon mdi-menu
-          //-   v-list(nav, :light='!$vuetify.theme.dark', :dark='$vuetify.theme.dark', :class='$vuetify.theme.dark ? `grey darken-4` : ``')
-          //-     v-list-item.pl-4(href='/')
-          //-       v-list-item-avatar(size='24'): v-icon(color='blue') mdi-home
-          //-       v-list-item-title.body-2 {{$t('common:header.home')}}
-          //-     v-list-item.pl-4(@click='')
-          //-       v-list-item-avatar(size='24'): v-icon(color='grey lighten-2') mdi-file-tree
-          //-       v-list-item-content
-          //-         v-list-item-title.body-2.grey--text.text--ligten-2 {{$t('common:header.siteMap')}}
-          //-         v-list-item-subtitle.overline.grey--text.text--lighten-2 Coming soon
-          //-     v-list-item.pl-4(href='/t')
-          //-       v-list-item-avatar(size='24'): v-icon(color='teal') mdi-tag-multiple
-          //-       v-list-item-title.body-2 {{$t('common:header.browseTags')}}
-          //-     v-list-item.pl-4(@click='assets')
-          //-       v-list-item-avatar(size='24'): v-icon(color='grey lighten-2') mdi-folder-multiple-image
-          //-       v-list-item-content
-          //-         v-list-item-title.body-2.grey--text.text--ligten-2 {{$t('common:header.imagesFiles')}}
-          //-         v-list-item-subtitle.overline.grey--text.text--lighten-2 Coming soon
-          v-toolbar-title(:class='{ "mx-3": $vuetify.breakpoint.mdAndUp, "mx-1": $vuetify.breakpoint.smAndDown }' v-if='$vuetify.breakpoint.smAndUp')
-            span.subheading {{title}}
+          div(style="padding:32px 0" v-if='$vuetify.breakpoint.smAndUp')
+            v-img.org-logo(:src='"/logo-alt.svg"')
+          div(v-else)
+            v-avatar(tile, size='34', @click='goHome')
+              v-img.org-logo(:src='logoUrl')
+            //- v-menu(open-on-hover, offset-y, bottom, left, min-width='250', transition='slide-y-transition')
+            //-   template(v-slot:activator='{ on }')
+            //-     v-app-bar-nav-icon.btn-animate-app(v-on='on', :class='$vuetify.rtl ? `mx-0` : ``')
+            //-       v-icon mdi-menu
+            //-   v-list(nav, :light='!$vuetify.theme.dark', :dark='$vuetify.theme.dark', :class='$vuetify.theme.dark ? `grey darken-4` : ``')
+            //-     v-list-item.pl-4(href='/')
+            //-       v-list-item-avatar(size='24'): v-icon(color='blue') mdi-home
+            //-       v-list-item-title.body-2 {{$t('common:header.home')}}
+            //-     v-list-item.pl-4(@click='')
+            //-       v-list-item-avatar(size='24'): v-icon(color='grey lighten-2') mdi-file-tree
+            //-       v-list-item-content
+            //-         v-list-item-title.body-2.grey--text.text--ligten-2 {{$t('common:header.siteMap')}}
+            //-         v-list-item-subtitle.overline.grey--text.text--lighten-2 Coming soon
+            //-     v-list-item.pl-4(href='/t')
+            //-       v-list-item-avatar(size='24'): v-icon(color='teal') mdi-tag-multiple
+            //-       v-list-item-title.body-2 {{$t('common:header.browseTags')}}
+            //-     v-list-item.pl-4(@click='assets')
+            //-       v-list-item-avatar(size='24'): v-icon(color='grey lighten-2') mdi-folder-multiple-image
+            //-       v-list-item-content
+            //-         v-list-item-title.body-2.grey--text.text--ligten-2 {{$t('common:header.imagesFiles')}}
+            //-         v-list-item-subtitle.overline.grey--text.text--lighten-2 Coming soon
+            v-toolbar-title(:class='{ "mx-3": $vuetify.breakpoint.mdAndUp, "mx-1": $vuetify.breakpoint.smAndDown }' v-if='$vuetify.breakpoint.smAndUp')
+              span.subheading {{title}}
       // Search & tags (big screen)
       v-flex( v-if='$vuetify.breakpoint.mdAndUp')
         v-toolbar.nav-header-inner(color='primary', dark, flat)
