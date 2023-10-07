@@ -16,10 +16,10 @@ COPY ./.eslintignore ./.eslintignore
 COPY ./.eslintrc.yml ./.eslintrc.yml
 
 RUN yarn cache clean
-RUN yarn --frozen-lockfile --non-interactive
+RUN yarn --non-interactive
 RUN yarn build
 RUN rm -rf /wiki/node_modules
-RUN yarn --production --frozen-lockfile --non-interactive
+RUN yarn --production --non-interactive
 RUN yarn patch-package
 
 # ===============
@@ -29,10 +29,10 @@ FROM node:18-alpine
 LABEL maintainer="requarks.io"
 
 RUN apk add bash curl git openssh gnupg sqlite --no-cache && \
-    mkdir -p /wiki && \
-    mkdir -p /logs && \
-    mkdir -p /wiki/data/content && \
-    chown -R node:node /wiki /logs
+  mkdir -p /wiki && \
+  mkdir -p /logs && \
+  mkdir -p /wiki/data/content && \
+  chown -R node:node /wiki /logs
 
 WORKDIR /wiki
 
