@@ -443,6 +443,14 @@ export default {
     commentsExternal: {
       type: Boolean,
       default: false
+    },
+    editShortcuts: {
+      type: String,
+      default: ''
+    },
+    filename: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -481,11 +489,12 @@ export default {
     isAuthenticated: get('user/authenticated'),
     commentsCount: get('page/commentsCount'),
     commentsPerms: get('page/effectivePermissions@comments'),
+    editShortcutsObj: get('page/editShortcuts'),
     rating: {
-      get () {
+      get() {
         return 3.5
       },
-      set (val) {
+      set(val) {
 
       }
     },
@@ -498,31 +507,39 @@ export default {
         return result
       }, []))
     },
-    pageUrl () { return window.location.href },
-    upBtnPosition () {
+    pageUrl() { return window.location.href },
+    upBtnPosition() {
       if (this.$vuetify.breakpoint.mdAndUp) {
         return this.$vuetify.rtl ? `right: 235px;` : `left: 235px;`
       } else {
         return this.$vuetify.rtl ? `right: 65px;` : `left: 65px;`
       }
     },
-    sidebarDecoded () {
+    sidebarDecoded() {
       return JSON.parse(Buffer.from(this.sidebar, 'base64').toString())
     },
-    tocDecoded () {
+    tocDecoded() {
       return JSON.parse(Buffer.from(this.toc, 'base64').toString())
     },
+    tocPosition: get('site/tocPosition'),
     hasAdminPermission: get('page/effectivePermissions@system.manage'),
     hasWritePagesPermission: get('page/effectivePermissions@pages.write'),
     hasManagePagesPermission: get('page/effectivePermissions@pages.manage'),
     hasDeletePagesPermission: get('page/effectivePermissions@pages.delete'),
     hasReadSourcePermission: get('page/effectivePermissions@source.read'),
     hasReadHistoryPermission: get('page/effectivePermissions@history.read'),
-    hasAnyPagePermissions () {
+    hasAnyPagePermissions() {
       return this.hasAdminPermission || this.hasWritePagesPermission || this.hasManagePagesPermission ||
         this.hasDeletePagesPermission || this.hasReadSourcePermission || this.hasReadHistoryPermission
     },
-    printView: sync('site/printView')
+    printView: sync('site/printView'),
+    editMenuExternalUrl() {
+      if (this.editShortcutsObj.editMenuBar && this.editShortcutsObj.editMenuExternalBtn) {
+        return this.editShortcutsObj.editMenuExternalUrl.replace('{filename}', this.filename)
+      } else {
+        return ''
+      }
+    }
   },
   created() {
     this.$store.set('page/authorId', this.authorId)
@@ -540,10 +557,13 @@ export default {
     if (this.effectivePermissions) {
       this.$store.set('page/effectivePermissions', JSON.parse(Buffer.from(this.effectivePermissions, 'base64').toString()))
     }
+    if (this.editShortcuts) {
+      this.$store.set('page/editShortcuts', JSON.parse(Buffer.from(this.editShortcuts, 'base64').toString()))
+    }
 
     this.$store.set('page/mode', 'view')
   },
-  mounted () {
+  mounted() {
     if (this.$vuetify.theme.dark) {
       this.scrollStyle.bar.background = '#424242'
     }
@@ -585,20 +605,22 @@ export default {
           this.$vuetify.goTo(decodeURIComponent(ev.currentTarget.hash), this.scrollOpts)
         }
       })
+
+      window.boot.notify('page-ready')
     })
   },
   methods: {
-    goHome () {
+    goHome() {
       window.location.assign('/')
     },
-    toggleNavigation () {
+    toggleNavigation() {
       this.navOpen = !this.navOpen
     },
-    upBtnScroll () {
+    upBtnScroll() {
       const scrollOffset = window.pageYOffset || document.documentElement.scrollTop
       this.upBtnShown = scrollOffset > window.innerHeight * 0.33
     },
-    print () {
+    print() {
       if (this.printView) {
         this.printView = false
       } else {
@@ -608,28 +630,28 @@ export default {
         })
       }
     },
-    pageEdit () {
+    pageEdit() {
       this.$root.$emit('pageEdit')
     },
-    pageHistory () {
+    pageHistory() {
       this.$root.$emit('pageHistory')
     },
-    pageSource () {
+    pageSource() {
       this.$root.$emit('pageSource')
     },
-    pageConvert () {
+    pageConvert() {
       this.$root.$emit('pageConvert')
     },
-    pageDuplicate () {
+    pageDuplicate() {
       this.$root.$emit('pageDuplicate')
     },
-    pageMove () {
+    pageMove() {
       this.$root.$emit('pageMove')
     },
-    pageDelete () {
+    pageDelete() {
       this.$root.$emit('pageDelete')
     },
-    handleSideNavVisibility () {
+    handleSideNavVisibility() {
       if (window.innerWidth === this.winWidth) { return }
       this.winWidth = window.innerWidth
       if (this.$vuetify.breakpoint.mdAndUp) {
@@ -638,7 +660,7 @@ export default {
         this.navShown = false
       }
     },
-    goToComments (focusNewComment = false) {
+    goToComments(focusNewComment = false) {
       this.$vuetify.goTo('#discussion', this.scrollOpts)
       if (focusNewComment) {
         document.querySelector('#discussion-new').focus()
@@ -649,17 +671,19 @@ export default {
 </script>
 
 <style lang="scss">
-
 .breadcrumbs-nav {
   .v-btn {
     min-width: 0;
+
     &__content {
       text-transform: none;
     }
   }
+
   .v-breadcrumbs__divider:nth-child(2n) {
     padding: 0 6px;
   }
+
   .v-breadcrumbs__divider:nth-child(2) {
     padding: 0 6px 0 12px;
   }
@@ -678,4 +702,53 @@ export default {
   display: none;
 }
 
+.page-header-section {
+  position: relative;
+
+  >.is-page-header {
+    position: relative;
+  }
+
+  .page-header-headings {
+    min-height: 52px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .page-edit-shortcuts {
+    position: absolute;
+    bottom: -33px;
+    right: 10px;
+
+    .v-btn {
+      border-right: 1px solid #DDD !important;
+      border-bottom: 1px solid #DDD !important;
+      border-radius: 0;
+      color: #777;
+      background-color: #FFF !important;
+
+      @at-root .theme--dark & {
+        background-color: #222 !important;
+        border-right-color: #444 !important;
+        border-bottom-color: #444 !important;
+        color: #CCC;
+      }
+
+      .v-icon {
+        color: mc('blue', '700');
+      }
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+}
 </style>
